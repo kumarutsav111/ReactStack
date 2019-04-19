@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {FlatList, View, Text} from 'react-native';
+import ListItem from './ListItem';
 
 
-class LibraryList extends Component {
+class LibraryList extends Component<Props> {
+    renderItem({item}){
+        return <ListItem item= {item}/>
+    }
     render(){
-        console.log(this.props);
-        //so my  expectation is that the props 
-        //function should have the values of libraries
-        return;
+        //console.log(this.props);
+        //so my  expectation is that the props function should have the values of libraries
+        return(
+        <FlatList
+            data = {this.props.libraries}
+            renderItem={this.renderItem}
+            keyExtractor={(item) => item.id }
+        />            
+        );
     }
 }
 const mapStateToProps = state => {
